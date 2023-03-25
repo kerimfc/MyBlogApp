@@ -22,11 +22,7 @@ namespace MyBlog.Core.Models
 
         public string? ArticleImage { get; set; }
 
-        public int PageId { get; set; }
-
         public int CategoryId { get; set; }
-
-        public Page Page { get; set; }
 
         public Category Category { get; set; }
     }

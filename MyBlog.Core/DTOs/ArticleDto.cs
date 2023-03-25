@@ -18,8 +18,6 @@ namespace MyBlog.Core.DTOs
 
         public string? ArticleImage { get; set; }
 
-        public int PageId { get; set; }
-
         public int CategoryId { get; set; }
     }
 }
