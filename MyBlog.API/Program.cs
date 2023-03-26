@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using MyBlog.Core.Repository;
+using MyBlog.Core.Services;
 using MyBlog.Core.UnitOfWorks;
 using MyBlog.Repository;
 using MyBlog.Repository.Repositories;
 using MyBlog.Repository.UnitOfWorks;
+using MyBlog.Service.Services;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-//builder.Services.AddScoped(typeof(IService<>), typeof(Service));
+builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 
 
 
