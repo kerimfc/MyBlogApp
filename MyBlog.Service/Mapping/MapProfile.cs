@@ -19,7 +19,6 @@ namespace MyBlog.Service.Mapping
             CreateMap<Article, ArticleDto>();
             CreateMap<Article, ArticleWidthHtmlDto>().ReverseMap();
             CreateMap<Page, PageDto>().ReverseMap();
-            CreateMap<Page, PageWidthArticles>();
         }
     }
 }

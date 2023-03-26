@@ -11,6 +11,7 @@ namespace MyBlog.Repository.Repositories
     public class ArticleRepository : GenericRepository<Article>, IArticleRepository
     {
         private readonly AppDbContext _context;
+
         public ArticleRepository(AppDbContext context) : base(context)
         {
             _context = context;
