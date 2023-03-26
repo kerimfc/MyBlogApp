@@ -14,7 +14,7 @@ namespace MyBlog.Core.DTOs
         [JsonIgnore]
         public int StatusCode { get; set; }
 
-        public List<string> Errors { get; set; }
+        public List<string>? Errors { get; set; }
 
         public static CustomResponseDto<T> Success(int statusCode, T data)
         {

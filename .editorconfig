@@ -24,6 +24,9 @@ csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
 csharp_style_unused_value_assignment_preference = discard_variable:suggestion
 csharp_style_prefer_utf8_string_literals = true:suggestion
 
+# CS8603: Possible null reference return.
+dotnet_diagnostic.CS8603.severity = none
+
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 4
@@ -81,3 +84,6 @@ dotnet_naming_style.pascal_case.required_suffix =
 dotnet_naming_style.pascal_case.word_separator = 
 dotnet_naming_style.pascal_case.capitalization = pascal_case
 dotnet_code_quality_unused_parameters = all:suggestion
+
+# Default severity for all analyzer diagnostics
+dotnet_analyzer_diagnostic.severity = none
