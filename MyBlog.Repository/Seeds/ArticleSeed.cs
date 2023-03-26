@@ -20,6 +20,8 @@ namespace MyBlog.Repository.Seeds
                     CategoryId = 1,
                     Title = "Makale 1",
                     Content = "Makale 1 Content 1",
+                    ContentUrl = "/Makale1",
+                    HtmlContent = "",
                     Rate = 0,
                     ReadCount = 0,
                     CreatedDate = DateTime.Now
@@ -32,6 +34,8 @@ namespace MyBlog.Repository.Seeds
                     CategoryId = 2,
                     Title = "Makale 2",
                     Content = "Makale 2 Content 2",
+                    ContentUrl = "/Makale2",
+                    HtmlContent = "",
                     Rate = 0,
                     ReadCount = 0,
                     CreatedDate = DateTime.Now
@@ -44,6 +48,8 @@ namespace MyBlog.Repository.Seeds
                     CategoryId = 3,
                     Title = "Makale 3",
                     Content = "Makale 3 Content 3",
+                    ContentUrl = "/Makale3",
+                    HtmlContent = "",
                     Rate = 0,
                     ReadCount = 0,
                     CreatedDate = DateTime.Now
