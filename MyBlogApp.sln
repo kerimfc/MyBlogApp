@@ -3,21 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Core", "MyBlog.Core\MyBlog.Core.csproj", "{0D216CB6-0617-4421-B051-668D302089BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.Core", "MyBlog.Core\MyBlog.Core.csproj", "{0D216CB6-0617-4421-B051-668D302089BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Repository", "MyBlog.Repository\MyBlog.Repository.csproj", "{5FAC6EFC-6574-4A0C-A97A-D813DDC71A2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.Repository", "MyBlog.Repository\MyBlog.Repository.csproj", "{5FAC6EFC-6574-4A0C-A97A-D813DDC71A2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Service", "MyBlog.Service\MyBlog.Service.csproj", "{8B31F8D1-3342-4506-B294-2A1DB18867D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.Service", "MyBlog.Service\MyBlog.Service.csproj", "{8B31F8D1-3342-4506-B294-2A1DB18867D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Caching", "MyBlog.Caching\MyBlog.Caching.csproj", "{0D855F64-8C5E-4A84-9208-2690BAB0F8C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.Caching", "MyBlog.Caching\MyBlog.Caching.csproj", "{0D855F64-8C5E-4A84-9208-2690BAB0F8C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Web", "MyBlog.Web\MyBlog.Web.csproj", "{0E306C4D-FB17-4F18-94CA-545A6081CCD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.Web", "MyBlog.Web\MyBlog.Web.csproj", "{0E306C4D-FB17-4F18-94CA-545A6081CCD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.API", "MyBlog.API\MyBlog.API.csproj", "{63920FF6-5102-4994-9C90-AAB92649CFB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.API", "MyBlog.API\MyBlog.API.csproj", "{63920FF6-5102-4994-9C90-AAB92649CFB7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{13247187-9847-4BA8-857D-B31891B759DB}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		notes.txt = notes.txt
 	EndProjectSection
 EndProject
 Global

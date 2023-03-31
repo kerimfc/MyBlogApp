@@ -9,12 +9,12 @@ namespace MyBlog.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesControllers : CustomBaseController
+    public class CategoriesController : CustomBaseController
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
 
-        public CategoriesControllers(ICategoryService categoryService, IMapper mapper)
+        public CategoriesController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
             _mapper = mapper;
