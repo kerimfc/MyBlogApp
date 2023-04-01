@@ -2,6 +2,7 @@
 using MyBlog.Core.Repository;
 using MyBlog.Core.Services;
 using MyBlog.Core.UnitOfWorks;
+using MyBlog.Service.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,17 +46,38 @@ namespace MyBlog.Service.Services
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _repository.GetAll().ToListAsync();
+            var hasValue = await _repository.GetAll().ToListAsync();
+
+            if (hasValue == null)
+            {
+                throw new NotFoundException($"{typeof(T).Name} not found");
+            }
+
+            return hasValue;
         }
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id);
+            var hasValue = await _repository.GetByIdAsync(id);
+
+            if(hasValue == null)
+            {
+                throw new NotFoundException($"{typeof(T).Name}({id}) not found");
+            }
+
+            return hasValue;
         }
 
         public async Task<T> GetByNameAsync(string name)
         {
-            return await _repository.GetByNameAsync(name);
+            var hasValue = await _repository.GetByNameAsync(name);
+
+            if (hasValue == null)
+            {
+                throw new NotFoundException($"{typeof(T).Name}({name}) not found");
+            }
+
+            return hasValue;
         }
 
         public async Task RemoveAsync(T entity)
@@ -79,7 +101,15 @@ namespace MyBlog.Service.Services
 
         public IQueryable<T> Where(Expression<Func<T, bool>> expression)
         {
-            return _repository.Where(expression);
+            var hasValue = _repository.Where(expression);
+
+
+            if (hasValue == null)
+            {
+                throw new NotFoundException($"{typeof(T).Name} not found");
+            }
+
+            return hasValue;
         }
     }
 }

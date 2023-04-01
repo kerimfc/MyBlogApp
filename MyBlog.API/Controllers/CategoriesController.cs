@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyBlog.API.Filter;
 using MyBlog.Core.DTOs;
 using MyBlog.Core.Models;
 using MyBlog.Core.Services;
@@ -30,15 +31,11 @@ namespace MyBlog.API.Controllers
             return CreateActionResult(CustomResponseDto<List<CategoryDto>>.Success(200, categoryDtos));
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Category>))]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var category = await _categoryService.GetByIdAsync(id);
-
-            if (category == null)
-            {
-                return CreateActionResult(CustomResponseDto<CategoryDto>.Fail(404, "This categoryi is not found ! "));
-            }
 
             var categoryDto = _mapper.Map<CategoryDto>(category);
 
