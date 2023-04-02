@@ -1,2 +1,3 @@
 01.04.2023 - AutoFac dersinde kalýndý.
 02.04.2023 - Caching-2 kýsým bitmedi.
+02.04.2023 - Caching-3 baþlanacak.

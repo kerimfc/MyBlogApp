@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using MyBlog.Core.Models;
 using MyBlog.Core.Repository;
 using MyBlog.Core.Services;
 using MyBlog.Core.UnitOfWorks;
+using MyBlog.Service.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,14 +38,24 @@ namespace MyBlog.Caching
             }
         }
 
-        public Task<Article> AddAsync(Article entity)
+        public async Task<Article> AddAsync(Article entity)
         {
-            throw new NotImplementedException();
+            await _repository.AddAsync(entity);
+            await _unitOfWork.CommitAsync();
+
+            await CacheAllCategoryAsync();
+
+            return entity;
         }
 
-        public Task<IEnumerable<Article>> AddRangeAsync(IEnumerable<Article> entities)
+        public async Task<IEnumerable<Article>> AddRangeAsync(IEnumerable<Article> entities)
         {
-            throw new NotImplementedException();
+            await _repository.AddRangeAsync(entities);
+            await _unitOfWork.CommitAsync();
+
+            await CacheAllCategoryAsync();
+
+            return entities;
         }
 
         public Task<bool> AnyAsync(Expression<Func<Article, bool>> expression)
@@ -53,37 +65,62 @@ namespace MyBlog.Caching
 
         public Task<IEnumerable<Article>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_memoryCache.Get<IEnumerable<Article>>(CacheArticleKey));
         }
 
         public Task<Article> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var article = _memoryCache.Get<List<Article>>(CacheArticleKey).FirstOrDefault(x => x.Id == id);
+
+            if (article == null)
+            {
+                throw new NotFoundException($"{typeof(Article).Name}({id}) not found!");
+            }
+
+            return Task.FromResult(article);
         }
 
         public Task<Article> GetByNameAsync(string name)
         {
-            throw new NotImplementedException();
+            var article = _memoryCache.Get<List<Article>>(CacheArticleKey).FirstOrDefault(x => x.Title.Contains(name));
+
+            if (article == null)
+            {
+                throw new NotFoundException($"{typeof(Article).Name}({name}) not found!");
+            }
+
+            return Task.FromResult(article);
         }
 
-        public Task RemoveAsync(Article entity)
+        public async Task RemoveAsync(Article entity)
         {
-            throw new NotImplementedException();
+            _repository.Remove(entity);
+            await _unitOfWork.CommitAsync();
+            await CacheAllCategoryAsync();
         }
 
-        public Task RemoveRangeAsync(IEnumerable<Article> entities)
+        public async Task RemoveRangeAsync(IEnumerable<Article> entities)
         {
-            throw new NotImplementedException();
+            _repository.RemoveRange(entities);
+            await _unitOfWork.CommitAsync();
+            await CacheAllCategoryAsync();
         }
 
-        public Task UpdateAsync(Article entity)
+        public async Task UpdateAsync(Article entity)
         {
-            throw new NotImplementedException();
+            _repository.Update(entity);
+            await _unitOfWork.CommitAsync();
+            await CacheAllCategoryAsync();
         }
 
         public IQueryable<Article> Where(Expression<Func<Article, bool>> expression)
         {
-            throw new NotImplementedException();
+            return _memoryCache.Get<List<Article>>(CacheArticleKey).Where(expression.Compile()).AsQueryable();
+        }
+
+        public async Task CacheAllCategoryAsync()
+        {
+            _memoryCache.Set(CacheArticleKey, await _repository.GetAll().ToListAsync());
         }
     }
 }
