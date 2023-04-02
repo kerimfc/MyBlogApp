@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MyBlog.Service\MyBlog.Service.csproj" />
+  </ItemGroup>
+
 </Project>
