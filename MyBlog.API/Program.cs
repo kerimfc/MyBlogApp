@@ -1,8 +1,11 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyBlog.API.Filter;
 using MyBlog.API.Middlewares;
+using MyBlog.API.Modules;
 using MyBlog.Core.Repository;
 using MyBlog.Core.Services;
 using MyBlog.Core.UnitOfWorks;
@@ -33,18 +36,6 @@ builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelS
 
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
-builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
-builder.Services.AddScoped(typeof(IPageRepository), typeof(PageRepository));
-builder.Services.AddScoped(typeof(IArticleRepository), typeof(ArticleRepository));
-
-
-builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
-builder.Services.AddScoped(typeof(IPageService), typeof(PageService));
-builder.Services.AddScoped(typeof(IArticleService), typeof(ArticleService));
-
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
 builder.Services.AddDbContext<AppDbContext>(
@@ -53,6 +44,12 @@ builder.Services.AddDbContext<AppDbContext>(
         option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
     })
 );
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+builder.Host.ConfigureContainer<ContainerBuilder>(
+        containerbuilder => containerbuilder.RegisterModule(new RepoServiceModule())
+    );
 
 var app = builder.Build();
 
